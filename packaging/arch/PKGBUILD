@@ -1,0 +1,21 @@
+# Maintainer: openOODA-tools <ops@openooda.org>
+pkgname=ooreset-bin
+_pkgname=ooreset
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="Emergency terminal hardware state reset restoring sane cooked-mode and cursor posture."
+arch=('x86_64')
+url="https://github.com/openOODA-tools/ooreset"
+license=('Apache-2.0')
+depends=('glibc')
+provides=('ooreset')
+conflicts=('ooreset')
+source_x86_64=("${url}/releases/download/v${pkgver}/ooreset-linux-x86_64"
+               "uninstall.sh::https://raw.githubusercontent.com/openOODA-tools/${_pkgname}/v${pkgver}/uninstall.sh")
+sha256sums_x86_64=('SKIP'
+                   'SKIP')
+
+package() {
+    install -Dm755 "${srcdir}/ooreset-linux-x86_64" "${pkgdir}/usr/bin/ooreset"
+    install -Dm755 uninstall.sh "${pkgdir}/usr/bin/ooreset-uninstall"
+}
